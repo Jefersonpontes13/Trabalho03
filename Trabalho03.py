@@ -30,7 +30,7 @@ Anos = int(now.year)
 
 while comando != 7:
     print("========= SISTEMA DE LOCAÇÃO DE VEÍCULOS =======")
-    print("--------------DATA: |{} \ {} \ {}|--------------\n".format(Dia, Mes, Anos))
+    print("--------------DATA: |{} \ {} \ {}|------------\n".format(Dia, Mes, Anos))
     print("Digite 1 para Adicionar veículos.")
     print("Digite 2 para consultar veículos.")
     print("Digite 3 para Alugar/reservar veículos.")
@@ -39,12 +39,15 @@ while comando != 7:
     print("Digite 6 para Avançar data atual.")
     print("Digite 7 Para ""SAIR"" ")
     comando = int(input("Digite a operação desejada: "))
+    print("")
     if comando == 1:
-        print("-------CADASTRO DE VEÍCULOS--------")
+        print("============= CADASTRO DE VEÍCULOS =============\n")
+        print("-----------------------------------")
         a = input("MARCA:")
         b = input("MODELO:")
         c = input("ANO:")
         d = input("VALOR DA DIÁRIA DO VEÍCULO:")
+        print("-----------------------------------\n")
         Marca.append(a)
         Modelo.append(b)
         Ano.append(c)
@@ -63,31 +66,39 @@ while comando != 7:
         Faluguel.append("")
         Cliente.append("")
         Prazo.append(0)
-        print("-----------------------------------")
+        print("================================================\n")
     if comando == 2:
-        print("--------CONSULTAR VEÍCULOS---------")
+        print("")
+        print("======== CONSULTAR VEÍCULOS =========\n")
         NumerodeCarros = len(Codigos)
         c = 0
+        print("-----------------------------------")
         while c < NumerodeCarros:
             print("|{}--{}--{}|".format(Codigos[c], Modelo[c], Status[c]))
             c = c + 1
             print("-----------------------------------")
-        print("Digite 1 para ver mais detalhes")
+        print("\nDigite 1 para ver mais detalhes")
+        
         print("Digite 2 para voltar a tela Inicial")
         aux = int(input("Digite a operação desejada:"))
+        print("")
         if aux == 1:
-            print("===================================")
+            print("============== INFORMAÇÕES DETALHADAS ================\n")
+            print("------------------------------------------------------\n")
             c = 0
             while c < NumerodeCarros:
-                print("|{}--{}--{}--{}--R${},00--{}|".format(Codigos[c], Marca[c], Modelo[c], Ano[c], Valor[c],
+                print("{} - {} {} {} - Valor: R${},00 {}".format(Codigos[c], Marca[c], Modelo[c], Ano[c], Valor[c],
                                                              Status[c]))
                 c = c + 1
-                print("-----------------------------------------------\n")
+                print("------------------------------------------------------\n")
+            print("======================================================\n")
+        print("")
     if comando == 3:
-        print("------Alugar/Reservar Veículos------")
+        print("===== Alugar/Reservar Veículos ======")
         print("Digite 1 para ALUGAR o veículo.")
         print("Digite 2 para RESERVAR o veículo.")
         op = input("Digite a operação desejada:")
+        print("")
         if op == "1":
             nl = input("Nome do locatário:")
             prazo = int(input("Prazo de locação:"))
@@ -152,22 +163,25 @@ while comando != 7:
                         m = m - 12
                         a = a + 1
                 Faluguel[int(cd) - 1] = str(str(d) + str(m) + str(a))
+        print("\n====================================\n")
     if comando == 4:
-        print("------Devolver/Liberar Veículos------")
-        print("-----------------------------------")
+        print("========= Devolver/Liberar Veículos =========")
+        print("\n-----------------------------------")
         a = len(Codigos)
         b = 0
         while b < a:
             if Status[b] != "DISPONÍVEL":
                 print(str(Codigos[b])+"--"+str(Modelo[b])+"--"+str(Status[b]))
-                print("----------------------------------------")
+                print("-----------------------------------")
             b = b + 1
-        print("Digite 1 para Devolver Veículo")
+        print("\nDigite 1 para Devolver Veículo")
         print("Digite 2 para Liberar Veículo")
         res = int(input("Digite a operação desejada:"))
+        print("")
         if res == 1:
+            print("----------------------------------------")
             cod = int(input("Digite o Código do veículo:"))
-            print("Cliente: ", Cliente[cod - 1])
+            print("\nCliente: ", Cliente[cod - 1])
             val = int(Ialuguel[cod - 1])//1000000
             d = val
             m = (int(Ialuguel[cod - 1]) - d*1000000) // 10000
@@ -190,7 +204,8 @@ while comando != 7:
                 Status[cod - 1] = "DISPONÍVEL"
             elif a > Anos:
                 Status[cod - 1] = "DISPONÍVEL"
-        print("----------------------------------------")
+        print("----------------------------------------\n")
+        print("================================================\n")
         if res == 2:
             cod = int(input("Digite o Código do veículo:"))
             print("Cliente: ", Cliente[cod - 1])
@@ -216,7 +231,7 @@ while comando != 7:
                         print("Total a pagar: R$", (val * float(Valor[cod - 1])))
                         Status[cod - 1] = "DISPONÍVEL"
     if comando == 5:
-        print("---------EXCLUIR VEÍCULOS-----------")
+        print("========== EXCLUIR VEÍCULOS ===========\n")
         vei = int(input("Digite o Código do veículo: "))
         if Status[vei - 1] == "DISPONÍVEL":
             del Codigos[vei - 1]
@@ -264,6 +279,8 @@ while comando != 7:
                 if (Dia + (30 - d)) > Prazo[cod - 1]:
                     Status[cod - 1] = "ATRASADO"
             cod = cod - 1
-
+        print("")
+        print("========= PASSOU-SE UM DIA =======\n\n")
     if comando == 7:
-        exit(0)
+        print("============== ATÉ LOGO ==============")
+        break
